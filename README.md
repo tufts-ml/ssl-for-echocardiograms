@@ -13,7 +13,7 @@ conda env create -f environment.yml
 
 ## Running experiments
 ### image level predictions
-The commands for reproducing major tables in the paper are provided in [runs](runs/)
+The commands for reproducing major tables in the paper are provided in [runs](runs/) \n
 For example, if you want to run a fully supervised baseline on our suggested split1 of the TMED-18-18
 
 ```
