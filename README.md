@@ -1,10 +1,10 @@
 # ssl-for-echocardiograms
 Code for the MLHC 2021 paper: A New Semi-supervised Learning Benchmark for Classifying View and Diagnosing Aortic Stenosis from Echocardiograms
 
-## Demo
+# Demo
 [load pretrained checkpoint and inference](LoadCheckpoint_Demo.ipynb)
 
-## Setup
+# Setup
 ### Download dataset
 Please visit our website https://www.eecs.tufts.edu/~mhughes/research/tmed/ and download the data
 
@@ -14,7 +14,7 @@ Follow the instructions here: https://conda.io/projects/conda/en/latest/user-gui
 ### Create environment
 conda env create -f environment.yml
 
-## Running experiments
+# Running experiments
 ### image level predictions
 The commands for reproducing major tables in the paper are provided in [runs](runs/) 
 
