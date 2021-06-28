@@ -13,7 +13,7 @@ conda env create -f environment.yml
 
 ## Running experiments
 ### image level predictions
-
+the commands for reproducing major tables in the paper are provided in [runs](runs/)
 ### patient level predictions
 
 ### A note on reproducibility
