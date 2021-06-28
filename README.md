@@ -26,6 +26,9 @@ For example, if you want to run a fully supervised baseline on our suggested spl
 bash launch_fs_fold0.sh run_here
 ```
 
+# Analysing results
+
+
 ### Patient-level predictions
 
 ### A note on reproducibility
