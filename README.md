@@ -1,6 +1,9 @@
 # ssl-for-echocardiograms
 Code for the MLHC 2021 paper: A New Semi-supervised Learning Benchmark for Classifying View and Diagnosing Aortic Stenosis from Echocardiograms
 
+## Demo
+[load pretrained checkpoint and inference](LoadCheckpoint_Demo.ipynb)
+
 ## Setup
 ### Download dataset
 Please visit our website https://www.eecs.tufts.edu/~mhughes/research/tmed/ and download the data
