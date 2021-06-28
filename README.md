@@ -15,7 +15,7 @@ Follow the instructions here: https://conda.io/projects/conda/en/latest/user-gui
 conda env create -f environment.yml
 
 # Running experiments
-### image level predictions
+### Image-level predictions
 The commands for reproducing major tables in the paper are provided in [runs](runs/) 
 
 For example, if you want to run a fully supervised baseline on our suggested split1 of the TMED-18-18
@@ -24,7 +24,7 @@ For example, if you want to run a fully supervised baseline on our suggested spl
 bash launch_fs_fold0.sh run_here
 ```
 
-### patient level predictions
+### Patient-level predictions
 
 ### A note on reproducibility
 While the focus of our paper is reproducibility, ultimately exact comparison to the results in our paper will be conflated by subtle differences such as the version of TensorFlow used, random seeds, etc. 
