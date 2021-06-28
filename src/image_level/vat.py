@@ -123,11 +123,18 @@ def main(argv):
     bootstrap_lower_percentile = 10 #what lower percentile of the bootstrap result to show
     num_selection_step = 80 #number of forward stepwise selection step to perform
     ensemble_last_checkpoints = 25 #use last 100 checkpoints as source for ensemble
+    ylim_lower=40
+    ylim_upper=100
     
-    train_labeled_files = ['train-label.tfrecord']
-    train_unlabeled_files = ['train-unlabeled.tfrecord']
-    valid_files = ['valid.tfrecord']
-    test_files = ['test.tfrecord']
+    train_labeled_files = FLAGS.train_labeled_files.split(',')
+    train_unlabeled_files = FLAGS.train_unlabeled_files.split(',')
+    valid_files = FLAGS.valid_files.split(',')
+    test_files = FLAGS.test_files.split(',')
+    
+#     print('train_labeled_files is {}'.format(train_labeled_files), flush=True)
+#     print('train_unlabeled_files is {}'.format(train_unlabeled_files), flush=True)
+#     print('valid_files is {}'.format(valid_files), flush=True)
+#     print('test_files is {}'.format(test_files), flush=True)
     
     
     ######################################################################################
@@ -168,7 +175,7 @@ def main(argv):
         if not os.path.exists(result_save_dir):
             os.makedirs(result_save_dir)
 
-        perform_analysis(figure_title, experiment_dir, result_save_dir, num_bootstrap_samples, bootstrap_upper_percentile, bootstrap_lower_percentile, ylim_lower=40, ylim_upper=100, report_type, task_name)
+        perform_analysis(figure_title, experiment_dir, result_save_dir, num_bootstrap_samples, bootstrap_upper_percentile, bootstrap_lower_percentile, ylim_lower, ylim_upper, report_type, FLAGS.task_name)
         
         perform_ensemble(experiment_dir, result_save_dir, num_selection_step, report_type, ensemble_last_checkpoints)
     
@@ -187,6 +194,11 @@ if __name__ == '__main__':
     flags.DEFINE_integer('scales', 0, 'Number of 2x2 downscalings in the classifier.')
     flags.DEFINE_integer('filters', 32, 'Filter size of convolutions.')
     flags.DEFINE_integer('repeat', 4, 'Number of residual layers per stage.')
+    flags.DEFINE_string('task_name', 'ViewClassification', 'either ViewClassification or DiagnosisClassification')
+    flags.DEFINE_string('train_labeled_files', 'train-label_VIEW.tfrecord', 'name of the train labeled tfrecord')
+    flags.DEFINE_string('valid_files', 'valid_VIEW.tfrecord', 'name of the valid tfrecord')
+    flags.DEFINE_string('test_files', 'test_VIEW.tfrecord', 'name of the test tfrecord')   
+    flags.DEFINE_string('train_unlabeled_files', 'train-unlabel_VIEW.tfrecord', 'name of the unlabeled set tfrecord')
     FLAGS.set_default('dataset', 'cifar10.3@250-5000')
     FLAGS.set_default('batch', 64)
     FLAGS.set_default('lr', 0.002)

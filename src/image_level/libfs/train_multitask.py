@@ -16,7 +16,7 @@ import tensorflow as tf
 from absl import flags
 from tqdm import trange
 
-from libml import utils
+from libml import data, utils
 from libml.train import ClassifySemi
 
 FLAGS = flags.FLAGS
@@ -26,6 +26,10 @@ class ClassifyFullySupervised(ClassifySemi):
     
     """Fully supervised classification.
     """
+
+    def __init__(self, train_dir: str, dataset: data.DataSet, nclass: int, **kwargs):
+        ClassifySemi.__init__(self, train_dir, dataset, nclass, **kwargs)
+        self.losses_dict = {'total_loss':[], 'unweighted_diagnosis_loss':[], 'weighted_diagnosis_loss':[], 'unweighted_view_loss':[], 'weighted_view_loss':[], 'scaled_weighted_view_loss':[]}
 
 
     

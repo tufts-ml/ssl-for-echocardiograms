@@ -26,8 +26,6 @@ class ClassifyFullySupervised(ClassifySemi):
     
     """Fully supervised classification.
     """
-
-
     
     def train_step(self, train_session, data_labeled):
         x = self.session.run(data_labeled)

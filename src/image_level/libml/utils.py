@@ -17,10 +17,13 @@ import glob
 import os
 import re
 
-from absl import flags
-import numpy as np
 import tensorflow as tf
 from tensorflow.python.client import device_lib
+from absl import flags
+import numpy as np
+from sklearn.metrics import confusion_matrix as sklearn_cm
+import pickle
+import matplotlib.pyplot as plt
 
 _GPUS = None
 FLAGS = flags.FLAGS

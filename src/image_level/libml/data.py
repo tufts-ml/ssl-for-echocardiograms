@@ -199,10 +199,10 @@ class DataSet:
         valid_files = [os.path.join(DATA_DIR, x) for x in valid_files]
         test_files = [os.path.join(DATA_DIR, x) for x in test_files]
 
-        print('Using {} as labeled train set'.format(train_labeled_files), flush = True)
-        print('Using {} as unlabeled train set'.format(train_unlabeled_files), flush = True)
-        print('Using {} as validation set'.format(valid_files), flush = True)
-        print('Using {} as test set'.format(test_files), flush = True)
+#         print('Using {} as labeled train set'.format(train_labeled_files), flush = True)
+#         print('Using {} as unlabeled train set'.format(train_unlabeled_files), flush = True)
+#         print('Using {} as validation set'.format(valid_files), flush = True)
+#         print('Using {} as test set'.format(test_files), flush = True)
 
 
         fn = memoize if do_memoize else lambda x: x.repeat().shuffle(FLAGS.shuffle)

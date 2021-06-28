@@ -40,7 +40,7 @@ flags.DEFINE_bool('reset_global_step', False, 'initialized from pretrained weigh
 flags.DEFINE_string('load_ckpt', "None", 'Checkpoint to initialize from')
 flags.DEFINE_string('checkpoint_exclude_scopes', "None", 'Comma-separated list of scopes of variables to exclude when restoring')
 flags.DEFINE_string('trainable_scopes', "None", 'Comma-separated list of scopes of variables to train')
-
+flags.DEFINE_bool('multitask_network_flag', False, 'whether the multitask network ablation')
 
 class Model:
     def __init__(self, train_dir: str, dataset: data.DataSet, **kwargs):
@@ -54,11 +54,12 @@ class Model:
         self.ops.update_step = tf.assign_add(self.step, FLAGS.batch)
         self.add_summaries(**kwargs)
 
-        self.losses_dict = {'labeled_losses':[], 'unlabeled_losses_unscaled':[], 'unlabeled_losses_scaled':[], 'unlabeled_losses_multiplier':[]}
+#         self.losses_dict = {'labeled_losses':[], 'unlabeled_losses_unscaled':[], 'unlabeled_losses_scaled':[], 'unlabeled_losses_multiplier':[]}
         self.best_balanced_validation_accuracy_raw = 0 #initialize to 0
         self.best_balanced_validation_accuracy_ema = 0 #initialize to 0
         self.saver = tf.train.Saver()
         self.init_op = tf.global_variables_initializer()
+        self.multitask_network_flag = FLAGS.multitask_network_flag
 
 
         #if there is already checkpoint in the Model/tf folder, continue training from the latest checkpoint, set FLAGS.load_ckpt to None, FLAGS.reset_global_step to False
@@ -200,6 +201,7 @@ class ClassifySemi(Model):
 
     def __init__(self, train_dir: str, dataset: data.DataSet, nclass: int, **kwargs):
         self.nclass = nclass
+        self.losses_dict = {'labeled_losses':[], 'unlabeled_losses_unscaled':[], 'unlabeled_losses_scaled':[], 'unlabeled_losses_multiplier':[]}
         Model.__init__(self, train_dir, dataset, nclass=nclass, **kwargs)
 
     def train_step(self, train_session, data_labeled, data_unlabeled):
@@ -309,11 +311,35 @@ class ClassifySemi(Model):
             images = np.concatenate(images, axis=0)
             labels = np.concatenate(labels, axis=0)
             return images, labels
+        
+        def collect_samples_Multitask(dataset):
+            """Return numpy arrays of all the samples from a dataset."""
+            it = dataset.batch(1).prefetch(16).make_one_shot_iterator().get_next()
+            images, labels = [], []
+            while 1:
+                try:
+                    v = self.session.run(it)
+                except tf.errors.OutOfRangeError:
+                    break
+                
+                images.append(v['image'])
+                labels.append(v['label_diagnosis'])
+                
+            images = np.concatenate(images, axis=0)
+            labels = np.concatenate(labels, axis=0)
+            return images, labels
+        
 
         if 'test' not in self.tmp.cache:
-            self.tmp.cache.test = collect_samples(self.dataset.test)
-            self.tmp.cache.valid = collect_samples(self.dataset.valid)
-            self.tmp.cache.train_labeled = collect_samples(self.dataset.eval_labeled)
+            if self.multitask_network_flag:
+                self.tmp.cache.test = collect_samples_Multitask(self.dataset.test)
+                self.tmp.cache.valid = collect_samples_Multitask(self.dataset.valid)
+                self.tmp.cache.train_labeled = collect_samples_Multitask(self.dataset.eval_labeled)
+            else:
+                self.tmp.cache.test = collect_samples(self.dataset.test)
+                self.tmp.cache.valid = collect_samples(self.dataset.valid)
+                self.tmp.cache.train_labeled = collect_samples(self.dataset.eval_labeled)
+
         
 
             

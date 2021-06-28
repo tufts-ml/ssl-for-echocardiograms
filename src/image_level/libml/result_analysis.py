@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix as sklearn_cm
 import seaborn as sns
 
-from utils import calculate_balanced_accuracy, load_pickle
+from libml.utils import calculate_accuracy, calculate_balanced_accuracy, load_pickle
 
 
 def get_percentile_curve(bootstrap_accuracy_curve_list, upper_percentile, lower_percentile):
@@ -426,5 +426,5 @@ def perform_analysis_multitask(figure_title, experiment_dir, result_save_dir, nu
     test_upper_percentile_curve, test_lower_percentile_curve = get_percentile_curve(test_bootstrap_accuracy_curve_list, bootstrap_upper_percentile, bootstrap_lower_percentile)
     
   
-    save_diagnosis_plots(figure_title, result_save_dir, test_original_accuracy_curve, test_lower_percentile_curve, test_upper_percentile_curve, valid_original_accuracy_curve, valid_lower_percentile_curve, valid_upper_percentile_curve, total_loss, unweighted_diagnosis_loss, weighted_diagnosis_loss, unweighted_view_loss, weighted_view_loss, scaled_weighted_view_loss, ylim_lower, ylim_upper, report_type)
+    save_diagnosis_plots_multitask(figure_title, result_save_dir, test_original_accuracy_curve, test_lower_percentile_curve, test_upper_percentile_curve, valid_original_accuracy_curve, valid_lower_percentile_curve, valid_upper_percentile_curve, total_loss, unweighted_diagnosis_loss, weighted_diagnosis_loss, unweighted_view_loss, weighted_view_loss, scaled_weighted_view_loss, ylim_lower, ylim_upper, report_type)
     

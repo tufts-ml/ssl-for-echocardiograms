@@ -28,7 +28,7 @@ import libfs.data as datafs
 from libfs.train_multitask import ClassifyFullySupervised
 from libml import utils
 from libml.models import MultiModel
-from libml.result_analysis import perform_analysis
+from libml.result_analysis import perform_analysis_multitask as perform_analysis
 from libml.checkpoint_ensemble import perform_ensemble
 
 import tensorflow as tf
@@ -132,12 +132,16 @@ def main(argv):
     bootstrap_lower_percentile = 10 #what lower percentile of the bootstrap result to show
     num_selection_step = 80 #number of forward stepwise selection step to perform
     ensemble_last_checkpoints = 25 #use last 100 checkpoints as source for ensemble
-
+    ylim_lower=40
+    ylim_upper=100
     
-    train_labeled_files = ['train-label.tfrecord']
-    valid_files = ['valid.tfrecord']
-    test_files = ['test.tfrecord']
-
+    train_labeled_files = FLAGS.train_labeled_files.split(',')
+    valid_files = FLAGS.valid_files.split(',')
+    test_files = FLAGS.test_files.split(',')
+    
+#     print('train_labeled_files is {}'.format(train_labeled_files), flush=True)
+#     print('valid_files is {}'.format(valid_files), flush=True)
+#     print('test_files is {}'.format(test_files), flush=True)
     ######################################################################################
 
     
@@ -176,7 +180,7 @@ def main(argv):
         if not os.path.exists(result_save_dir):
             os.makedirs(result_save_dir)
 
-        perform_analysis(figure_title, experiment_dir, result_save_dir, num_bootstrap_samples, bootstrap_upper_percentile, bootstrap_lower_percentile, ylim_lower=40, ylim_upper=100, report_type, task_name)
+        perform_analysis(figure_title, experiment_dir, result_save_dir, num_bootstrap_samples, bootstrap_upper_percentile, bootstrap_lower_percentile, ylim_lower, ylim_upper, report_type, FLAGS.task_name)
         
         perform_ensemble(experiment_dir, result_save_dir, num_selection_step, report_type, ensemble_last_checkpoints)
         
@@ -189,12 +193,16 @@ if __name__ == '__main__':
     flags.DEFINE_string('class_weights_diagnosis', '0.3385,0.3292,0.3323', 'the weights used for weighted cross entropy loss for diagnosis prediction')
     flags.DEFINE_string('class_weights_view', '0.2447,0.7238,0.0316', 'the weights used for weighted cross entropy loss for view prediction')
     flags.DEFINE_float('auxiliary_task_weight', 0.3, 'control the strength of auxiliary task loss')
-    flags.DEFINE_string('continued_training', '0_30000', 'the job is which step to which step')    
+    flags.DEFINE_string('continued_training', '0_30000', 'the job is which step to which step')
+    flags.DEFINE_string('task_name', 'ViewClassification', 'either ViewClassification or DiagnosisClassification')
+    flags.DEFINE_string('train_labeled_files', 'train-label_VIEW.tfrecord', 'name of the train labeled tfrecord')
+    flags.DEFINE_string('valid_files', 'valid_VIEW.tfrecord', 'name of the valid tfrecord')
+    flags.DEFINE_string('test_files', 'test_VIEW.tfrecord', 'name of the test tfrecord')
     flags.DEFINE_float('smoothing', 0.001, 'Label smoothing.')
     flags.DEFINE_integer('scales', 0, 'Number of 2x2 downscalings in the classifier.')
     flags.DEFINE_integer('filters', 32, 'Filter size of convolutions.')
     flags.DEFINE_integer('repeat', 4, 'Number of residual layers per stage.')
-    FLAGS.set_default('arch', 'resnet_multitask ')
+    FLAGS.set_default('arch', 'resnet_multitask')
     FLAGS.set_default('dataset', 'echo')
     FLAGS.set_default('batch', 64)
     FLAGS.set_default('lr', 0.002)
