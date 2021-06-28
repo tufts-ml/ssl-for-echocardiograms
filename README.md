@@ -26,10 +26,9 @@ For example, if you want to run a fully supervised baseline on our suggested spl
 bash launch_fs_fold0.sh run_here
 ```
 
-# Analysing results
-
-
 ### Patient-level predictions
+
+# Analysing results
 
 ### A note on reproducibility
 While the focus of our paper is reproducibility, ultimately exact comparison to the results in our paper will be conflated by subtle differences such as the version of TensorFlow used, random seeds, etc. 
