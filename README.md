@@ -8,7 +8,10 @@ Code for the MLHC 2021 paper: A New Semi-supervised Learning Benchmark for Class
 ### Download dataset
 Please visit our website https://www.eecs.tufts.edu/~mhughes/research/tmed/ and download the data
 
-### Install dependencies
+### Install Anaconda
+Follow the instructions here: https://conda.io/projects/conda/en/latest/user-guide/install/index.html
+
+### Create environment
 conda env create -f environment.yml
 
 ## Running experiments
