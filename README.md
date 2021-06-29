@@ -15,6 +15,9 @@ Follow the instructions here: https://conda.io/projects/conda/en/latest/user-gui
 ### Create environment
 conda env create -f environment.yml
 
+### Process the dataset
+PROVIDE A DEMO NOTEBOOK
+
 
 # Running experiments
 ### Image-level predictions
