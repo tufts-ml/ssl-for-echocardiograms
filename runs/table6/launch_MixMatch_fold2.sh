@@ -12,7 +12,7 @@ else
     ACTION_NAME=$1
 fi
 
-export gpu_idx=0 
+export gpu_idx=2 
 export ML_DATA="../../ML_DATA/TMED-156-52/fold2_multitask/64_MaintainingAspectRatio_ResizingThenPad_ExcludeDoppler_grayscale/"
 export PYTHONPATH=$PYTHONPATH:.
 export train_kimg=2000

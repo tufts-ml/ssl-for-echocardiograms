@@ -71,7 +71,7 @@ def calculate_balanced_accuracy(true_labels, predictions, return_type = 'balance
     elif return_type == 'balanced_accuracy':
         return balanced_accuracy * 100
     else:
-        raise NameError('Unsupported return_type in hz_utils calculate_balanced_accuracy fn')
+        raise NameError('Unsupported return_type in this calculate_balanced_accuracy fn')
 
     
 def get_config():

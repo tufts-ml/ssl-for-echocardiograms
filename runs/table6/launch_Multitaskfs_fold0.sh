@@ -12,19 +12,19 @@ else
     ACTION_NAME=$1
 fi
 
-export gpu_idx=2
-export ML_DATA="../../ML_DATA/TMED-18-18_MultitaskAblation/fold0_multitask/64_MaintainingAspectRatio_ResizingThenPad_ExcludeDoppler_grayscale/"
+export gpu_idx=0
+export ML_DATA="../../ML_DATA/TMED-156-52_MultitaskAblation/fold0_multitask/64_MaintainingAspectRatio_ResizingThenPad_ExcludeDoppler_grayscale/"
 export PYTHONPATH=$PYTHONPATH:.
 export train_kimg=2000
 export dataset="echo"
-export class_weights_diagnosis="0.3385,0.3292,0.3323"
-export class_weights_view="0.2447,0.7238,0.0316"
-export auxiliary_task_weight=3.0
+export class_weights_diagnosis="0.3741,0.3541,0.2718"
+export class_weights_view="0.2300,0.7387,0.0313"
+export auxiliary_task_weight=1.0
 export lr=0.002
-export wd=0.2
+export wd=0.02
 export smoothing=0.001
 export scales=4
-export train_dir="../../experiments/table5/FS_Multitask/fold0"
+export train_dir="../../experiments/table6/FS_Multitask/fold0"
 export task_name="DiagnosisClassification"
 export train_labeled_files='train-label_multitask.tfrecord'
 export valid_files='valid_multitask.tfrecord'
