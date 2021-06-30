@@ -20,8 +20,9 @@ PROVIDE A DEMO NOTEBOOK
 
 
 # Running experiments
-### Image-level predictions
 The commands for reproducing major tables in the paper are provided in [runs](runs/) 
+
+### Image-level predictions
 
 For example, if you want to run a fully supervised baseline on our suggested split1 of the TMED-18-18
 
@@ -30,6 +31,15 @@ bash launch_fs_fold0.sh run_here
 ```
 
 ### Patient-level predictions
+We have provided the saved image level predictions in folder [predictions](predictions/), so that the patient level prediction code can run smoothly to reproduce our results in the paper. 
+
+For example, if you want to run the patient level prediction on our suggested split on TMED-156-52, go to runs/table7
+
+```
+bash launch_fs_fold0.sh run_here
+```
+
+In practice, the user can save their own image level predictions to the folder and run the script instead.
 
 # Analysing results
 
