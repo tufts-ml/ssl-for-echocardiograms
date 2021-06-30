@@ -24,7 +24,7 @@ The commands for reproducing major tables in the paper are provided in [runs](ru
 
 ### Image-level predictions
 
-For example, if you want to run a fully supervised baseline on our suggested split1 of the TMED-18-18
+For example, if you want to run a fully supervised baseline on our suggested split1 on the TMED-18-18
 
 ```
 bash launch_fs_fold0.sh run_here
