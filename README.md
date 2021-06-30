@@ -50,3 +50,9 @@ While the focus of our paper is reproducibility, ultimately exact comparison to 
 
 
 # Citing this work
+@inproceedings{huangSemisupervisedEchocardiogramBenchmark2021,
+    title = {A New Semi-supervised Learning Benchmark for Classifying View and Diagnosing Aortic Stenosis from Echocardiograms},
+    booktitle = {Machine Learning for Healthcare},
+    author = {Huang, Zhe and Long, Gary and Wessler, Benjamin and Hughes, Michael C.},
+    year = {2021},
+}
