@@ -43,7 +43,7 @@ In practice, the user can save their own image level predictions to the folder a
 
 # Analysing results
 
-The results including the training curves, validation and test balanced accuracy with and without ensemble, will be automatically saved under the results_analysis folder (created during training) under your specified train_dir in the bash script.  
+The results including the training curves, validation and test balanced accuracy with and without ensemble etc, will be automatically saved under the results_analysis folder (created during training) under your specified train_dir in the bash script.  
 
 ### A note on reproducibility
 While the focus of our paper is reproducibility, ultimately exact comparison to the results in our paper will be conflated by subtle differences such as the version of TensorFlow used, random seeds, etc. 
