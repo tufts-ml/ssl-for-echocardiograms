@@ -2,7 +2,8 @@
 Code for the MLHC 2021 paper: A New Semi-supervised Learning Benchmark for Classifying View and Diagnosing Aortic Stenosis from Echocardiograms
 
 # Demo
-[load pretrained checkpoint and inference](LoadCheckpoint_Demo.ipynb)
+1. [visualize the raw data](LoadData_Visualize.ipynb)
+2. [load pretrained checkpoint and inference](LoadCheckpoint_Demo.ipynb)
 
 
 # Setup
@@ -16,8 +17,12 @@ Follow the instructions here: https://conda.io/projects/conda/en/latest/user-gui
 conda env create -f environment.yml
 
 ### Process the dataset
-PROVIDE A DEMO NOTEBOOK
+Folder [Data_Processing](Data_Processing/) provides script to process the raw png files into tfrecords, which can then be loaded to train the model.
+For example, if you want to create the tfrecord according to our suggested split1 on TMED-18-18
 
+```
+bash process_TMED_18_18_fold0.sh
+```
 
 # Running experiments
 The commands for reproducing major tables in the paper are provided in [runs](runs/) 
