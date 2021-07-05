@@ -1,6 +1,10 @@
 # folders
 ML_DATA/
 experiments/
+ML_DATA_OriginalUsedForMLHC
+
+# notebooks
+ProcessData_SaveTo_tfrecord_Demo.ipynb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -13,18 +13,16 @@ else
 fi
 
 export gpu_idx=2 
-export ML_DATA="../../ML_DATA/TMED-18-18/fold1_multitask/64_MaintainingAspectRatio_ResizingThenPad_ExcludeDoppler_grayscale/"
+export ML_DATA="../../ML_DATA/TMED-18-18/fold1/"
 export PYTHONPATH=$PYTHONPATH:.
-export train_kimg=100
-export dataset="echo"
+export train_kimg=2000
 export class_weights="0.2141,0.7546,0.0313"
 export lr=0.0007
 export wd=0.002
 export vat_eps=18.0
-export smoothing=0.01
-export scales=4
 export train_dir="../../experiments/table3/vat/fold1"
 export task_name="ViewClassification"
+export report_type="RAW_BalancedAccuracy"
 export train_labeled_files='train-label_VIEW.tfrecord'
 export train_unlabeled_files='train-unlabel_VIEW.tfrecord'
 export valid_files='valid_VIEW.tfrecord'

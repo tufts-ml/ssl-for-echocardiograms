@@ -5,7 +5,6 @@ CUDA_VISIBLE_DEVICES=$gpu_idx python ../../src/image_level/pseudo_label.py \
     --train_kimg $train_kimg \
     --train_dir $train_dir \
     --task_name $task_name \
-    --dataset $dataset \
     --train_labeled_files $train_labeled_files \
     --train_unlabeled_files $train_unlabeled_files \
     --valid_files $valid_files \
@@ -13,7 +12,6 @@ CUDA_VISIBLE_DEVICES=$gpu_idx python ../../src/image_level/pseudo_label.py \
     --class_weights $class_weights \
     --lr $lr \
     --wd $wd \
-    --smoothing $smoothing \
     --consistency_weight $consistency_weight \
-    --scales $scales \
+    --report_type $report_type\
     

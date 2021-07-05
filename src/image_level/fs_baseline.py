@@ -130,7 +130,7 @@ def main(argv):
         class_weights=FLAGS.class_weights,
         continued_training=FLAGS.continued_training,
         smoothing=FLAGS.smoothing,
-        scales=FLAGS.scales or (log_width - 2),
+        scales=FLAGS.scales,
         filters=FLAGS.filters,
         repeat=FLAGS.repeat)
     
@@ -139,16 +139,16 @@ def main(argv):
     model.train(FLAGS.train_kimg << 10, FLAGS.report_kimg << 10)
     
     
-    for report_type in ['RAW_BalancedAccuracy', 'EMA_BalancedAccuracy']:
-        result_save_dir = os.path.join(experiment_dir, 'result_analysis', report_type)
+#     for report_type in ['RAW_BalancedAccuracy', 'EMA_BalancedAccuracy']:
+    result_save_dir = os.path.join(experiment_dir, 'result_analysis', FLAGS.report_type)
 
-        if not os.path.exists(result_save_dir):
-            os.makedirs(result_save_dir)
+    if not os.path.exists(result_save_dir):
+        os.makedirs(result_save_dir)
 
-        perform_analysis(figure_title, experiment_dir, result_save_dir, num_bootstrap_samples, bootstrap_upper_percentile, bootstrap_lower_percentile, ylim_lower, ylim_upper, report_type, FLAGS.task_name)
-        
-        perform_ensemble(experiment_dir, result_save_dir, num_selection_step, report_type, ensemble_last_checkpoints)
-        
+    perform_analysis(figure_title, experiment_dir, result_save_dir, num_bootstrap_samples, bootstrap_upper_percentile, bootstrap_lower_percentile, ylim_lower, ylim_upper, FLAGS.report_type, FLAGS.task_name)
+
+    perform_ensemble(experiment_dir, result_save_dir, num_selection_step, FLAGS.report_type, ensemble_last_checkpoints)
+
         
     
 if __name__ == '__main__':
@@ -162,7 +162,7 @@ if __name__ == '__main__':
     flags.DEFINE_string('valid_files', 'valid_VIEW.tfrecord', 'name of the valid tfrecord')
     flags.DEFINE_string('test_files', 'test_VIEW.tfrecord', 'name of the test tfrecord')   
     flags.DEFINE_float('smoothing', 0.001, 'Label smoothing.')
-    flags.DEFINE_integer('scales', 0, 'Number of 2x2 downscalings in the classifier.')
+    flags.DEFINE_integer('scales', 4, 'Number of 2x2 downscalings in the classifier.')
     flags.DEFINE_integer('filters', 32, 'Filter size of convolutions.')
     flags.DEFINE_integer('repeat', 4, 'Number of residual layers per stage.')
     FLAGS.set_default('dataset', 'echo')

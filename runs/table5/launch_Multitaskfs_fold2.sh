@@ -13,19 +13,17 @@ else
 fi
 
 export gpu_idx=3
-export ML_DATA="../../ML_DATA/TMED-18-18_MultitaskAblation/fold2_multitask/64_MaintainingAspectRatio_ResizingThenPad_ExcludeDoppler_grayscale/"
+export ML_DATA="../../ML_DATA/TMED-18-18_MultitaskAblation/fold2/"
 export PYTHONPATH=$PYTHONPATH:.
 export train_kimg=2000
-export dataset="echo"
 export class_weights_diagnosis="0.3749,0.2903,0.3348"
 export class_weights_view="0.2120,0.7602,0.0279"
 export auxiliary_task_weight=3.0
 export lr=0.0007
 export wd=0.02
-export smoothing=0.001
-export scales=4
 export train_dir="../../experiments/table5/FS_Multitask/fold2"
 export task_name="DiagnosisClassification"
+export report_type="EMA_BalancedAccuracy"
 export train_labeled_files='train-label_multitask.tfrecord'
 export valid_files='valid_multitask.tfrecord'
 export test_files='test_multitask.tfrecord'

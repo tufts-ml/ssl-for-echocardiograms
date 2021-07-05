@@ -13,20 +13,18 @@ else
 fi
 
 export gpu_idx=0 
-export ML_DATA="../../ML_DATA/TMED-18-18/fold1_multitask/64_MaintainingAspectRatio_ResizingThenPad_ExcludeDoppler_grayscale/"
+export ML_DATA="../../ML_DATA/TMED-18-18/fold1/"
 export PYTHONPATH=$PYTHONPATH:.
-export train_kimg=100
-export dataset="echo"
+export train_kimg=2000
 export class_weights="0.3406,0.3159,0.3435"
 export lr=0.0007
 export wd=0.0002
-export beta=0.75
 export w_match=10.0
 export warmup_delay=1024
 export warmup_kimg=1024
-export scales=4
 export train_dir="../../experiments/table5/PretrainedMixMatch/fold1"
 export task_name="DiagnosisClassification"
+export report_type="EMA_BalancedAccuracy"
 export train_labeled_files='train-label_DIAGNOSIS.tfrecord'
 export train_unlabeled_files='train-unlabel_DIAGNOSIS.tfrecord'
 export valid_files='valid_DIAGNOSIS.tfrecord'
